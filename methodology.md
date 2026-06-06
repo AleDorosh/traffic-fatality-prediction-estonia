@@ -61,8 +61,8 @@ The rural test set was constructed to represent non-urban Estonia: state-maintai
 **Filtering**
 
 1. All accidents within the 14 urban settlements used in training were excluded.
-2. Only accidents on state road types were retained (national roads, main roads, secondary roads). Local and municipal roads were excluded to reduce noise from heterogeneous road classifications.
-3. The same accident type filters applied to the urban set were used (vehicle collisions, single-vehicle accidents, pedestrian/cyclist/micromobility accidents).
+2. The same accident type filters applied to the urban set were used (vehicle collisions, single-vehicle accidents, pedestrian/cyclist/micromobility accidents).
+3. Accidents in non-standard environments (e.g. parking lots, forest roads, pedestrian paths, squares) were excluded.
 4. Only accidents involving at least one motor vehicle driver were included.
 5. The same 2018–2025 time frame was applied.
 
@@ -92,7 +92,7 @@ The national set represents real-world deployment conditions: a model trained on
 
 **Filtering**
 
-The same accident type, driver involvement, time period, and environment filters were applied as in the urban and rural sets. No geographic restriction was applied beyond these shared criteria.
+The same accident type, driver involvement, road type, time period, and environment filters were applied as in the urban and rural sets. No geographic restriction was applied beyond these shared criteria.
 
 **Cleaning**
 
