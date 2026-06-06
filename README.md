@@ -14,3 +14,5 @@ Estonia has detailed records of every traffic accident with casualty. I trained 
 -- Set 3: national_test  
 -- No location filter at all — full Estonia
 -- This is urban + rural combined, so it's a superset check
+
+"Before we look at model performance — just look at the fatality rates. Urban: 1.9%. Rural: 8.1%. National: 5.0%. The model was trained on the left bar. The question is whether it understands the right one."
