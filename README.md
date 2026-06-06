@@ -21,3 +21,7 @@ rain:      urban_filter     (3,533 accidents, 1.9% fatal)
     ├── Test A: urban holdout    (80/20 split of urban, same distribution)
     ├── Test B: rural_filter     (3,610 accidents, 8.1% fatal — OOD)
     └── Test C: national_filter  (7,160 accidents, 5.0% fatal — blended OOD)
+
+
+    his is a clean, well-motivated design with a clear narrative progression — each test set is progressively further from the training distribution. That's actually a recognised evaluation pattern in ML called distribution shift analysis and worth naming as such in your report and README. It elevates the project from "I trained a classifier" to "I systematically evaluated how performance degrades under distribution shift."
+One thing to flag for your Python notebook — when you evaluate on rural and national, report metrics both with and without recalibrating the decision threshold. Your model will be calibrated to ~2% fatality rate, so the default 0.5 threshold will almost certainly underpredict fatalities on rural data. Adjusting the threshold to match the rural prior (or using a precision-recall curve rather than ROC) will give a fairer picture of whether the features transfer, separate from the calibration problem.
