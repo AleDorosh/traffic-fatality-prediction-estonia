@@ -16,3 +16,8 @@ Estonia has detailed records of every traffic accident with casualty. I trained 
 -- This is urban + rural combined, so it's a superset check
 
 "Before we look at model performance — just look at the fatality rates. Urban: 1.9%. Rural: 8.1%. National: 5.0%. The model was trained on the left bar. The question is whether it understands the right one."
+rain:      urban_filter     (3,533 accidents, 1.9% fatal)
+    |
+    ├── Test A: urban holdout    (80/20 split of urban, same distribution)
+    ├── Test B: rural_filter     (3,610 accidents, 8.1% fatal — OOD)
+    └── Test C: national_filter  (7,160 accidents, 5.0% fatal — blended OOD)
