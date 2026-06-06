@@ -33,8 +33,8 @@ The dataset was cleaned to improve consistency and reliability. At the time of c
 
 #### Final Dataset (Urban Training Set)
 * 3,533 accidents
-* 67 deaths
-* 4,019 injuries
+* 67 deaths across 64 accidents
+* 4,019 injured across 3,469 accidents
 * Average road width: 9.19 m
 
 #### Variables Used
