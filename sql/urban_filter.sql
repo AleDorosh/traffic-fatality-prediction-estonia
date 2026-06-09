@@ -1,7 +1,7 @@
 -- urban_filter.sql
 -- Produces the cleaned urban training dataset from the raw accident export.
 -- Input:  accidents_full (raw, with spatial join at 20m)
--- Output: urban_filter (3,533 rows, 67 fatalities)
+-- Output: urban_filter (3542 rows,  67 fatalities)
 -- Dialect: DuckDB
 
 CREATE TABLE urban_filter AS
@@ -21,6 +21,12 @@ SELECT
     "Liiklusõnnetuse liik" AS accident_type,
     "Liiklusõnnetuse liik (detailne)" AS accident_type_detailed,
     "Tüüpskeem" AS accident_scenario,
+   -- participation flags
+    "Turvavarustust mitte kasutanud isiku osalusel" AS no_safety_equipment,
+    "Mootorratturi osalusel" AS motorcyclist,
+    "Jalakäija osalusel" AS pedestrian,
+    "Eaka (65+) mootorsõidukijuhi osalusel" AS elderly_driver,
+    "Alaealise osalusel" AS underage,
 -- road characteristics
     "Tee tüüp" AS road_type,
     "Tee tüüp (detailne)" AS road_type_detailed,
@@ -66,7 +72,9 @@ AND "Tee tüüp (detailne)" NOT IN (
 'Jalg- ja jalgrattatee', 'Jalgrattatee', 'Jalgtee'
 )
 -- Keep only roads with width greater than 3 m 
-AND road_width >= 3;
+AND road_width >= 3
+AND speed_limit < 90;
+
 
 -- Step 1: Remove duplicate accident IDs from spatial join multi-match
 DELETE FROM urban_filter
@@ -82,15 +90,15 @@ DELETE FROM urban_filter
 WHERE speed_limit IS NULL;
 SELECT 'After speed_limit NULL drop: ' || COUNT(*) FROM urban_filter;
 
--- Step 3: Remove all rows where more > 1 value is NULL
+-- Step 3: Remove all rows where more > 3 value is NULL
 DELETE FROM urban_filter
 WHERE 
 (accident_scenario IS NULL)::INT + (road_condition IS NULL)::INT +
 (road_surface_condition IS NULL)::INT + (weather IS NULL)::INT + (lighting IS NULL)::INT +
-(speed_limit IS NULL)::INT > 1;
+(speed_limit IS NULL)::INT > 3;
 SELECT 'After > 1 NULL drop: ' || COUNT(*) FROM urban_filter;
 
--- Replace NULL values in secondary columns with UNKNOWN
+-- Step 4. Replace NULL values in secondary columns with UNKNOWN
 UPDATE urban_filter
 SET 
     accident_scenario = COALESCE(accident_scenario, 'Unknown'),
@@ -99,24 +107,18 @@ SET
     weather = COALESCE(weather, 'Unknown'),
     lighting = COALESCE(lighting, 'Unknown');
 
--- Remove unrealistic values
+-- Step 5. Remove unrealistic values
 DELETE
 FROM urban_filter
 WHERE injured = 15 OR (injured = 7 AND accident_type = 'Jalakäijaõnnetus');
 
--- Remove unrealistic values 
-DELETE
-FROM urban_filter
-WHERE speed_limit IN (90, 110);
-
--- Remove unrealistic values
 DELETE
 FROM urban_filter
 WHERE road_width = 35;
 
 SELECT 'After unrealistic value drop: ' || COUNT(*) FROM urban_filter;
 
--- Replace Pole teada, Teadmata etc values in secondary columns with UNKNOWN
+-- Step 6. Replace Pole teada, Teadmata etc values in secondary columns with UNKNOWN
 UPDATE urban_filter
 SET accident_scenario = 'Unknown'
 WHERE accident_scenario = 'Tundmatu liikluskonflikt.';
@@ -137,8 +139,10 @@ UPDATE urban_filter
 SET weather = 'Unknown'
 WHERE weather = 'Pole teada';
 
--- Check if all rows were imported
-SELECT COUNT(*)
+-- Step 7. Check if all rows were imported
+SELECT 
+	COUNT(*) AS rows,
+ 	SUM(deaths) AS fatalities
 FROM urban_filter;
 
 SELECT *
