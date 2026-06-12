@@ -55,16 +55,17 @@ The rural set excludes speed limits ≥ 90 km/h to remove highways, which repres
 traffic-fatality-prediction-estonia/
 │
 ├── data/
-│   └── (CSV files — not tracked, see Data sources below)
+│   ├── map_preview.png
+│   └── raw_data_sample.csv
 │
 ├── sql/
-│   ├── urban_filter.sql        # Training set: 14 Estonian cities, 2018-2025
-│   ├── rural_filter.sql        # Test set: rural areas, speed < 90 km/h
-│   └── national_filter.sql     # Feasibility set: all Estonia
+│   ├── urban_setr.sql        # Training set: 14 Estonian cities, 2018-2025
+│   ├── rural_set.sql        # Test set: rural areas, speed < 90 km/h
+│   └── national_set.sql     # Feasibility set: all Estonia
 │
-├── notebooks/
+├── notebook/
 │   ├── 01_eda_urban_rural.ipynb       # Side-by-side EDA: urban vs rural
-│   ├── 02_feature_engineering.ipynb   # Feature engineering: urban training set
+│   ├── 02_feature_engineering_urban.ipynb   # Feature engineering: urban training set
 │   ├── 03_modelling_urban.ipynb       # LR and RF on urban, threshold calibration
 │   ├── 04_evaluation.ipynb            # Urban → rural evaluation
 │   ├── 05_flipped_experiment.ipynb    # Rural → urban (flipped)
