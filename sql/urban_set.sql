@@ -132,8 +132,3 @@ SELECT
 	COUNT(*) AS rows,
  	SUM(deaths) AS fatalities
 FROM urban_set;
-
-SELECT COUNT(*)
-FROM urban_set;
-
-
