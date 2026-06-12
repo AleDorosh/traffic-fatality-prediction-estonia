@@ -1,3 +1,9 @@
+-- urban_filter.sql
+-- Produces the cleaned urban training dataset from the raw accident export.
+-- Input:  accidents_full (raw, with spatial join at 20m)
+-- Output: urban_filter (3542 rows,  67 fatalities)
+-- Dialect: DuckDB
+
 CREATE TABLE urban_set AS
 SELECT
 -- accident identifiers
