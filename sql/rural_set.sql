@@ -132,6 +132,3 @@ SELECT
 	COUNT(*) AS rows,
  	SUM(deaths) AS fatalities
 FROM rural_set;
-
-SELECT COUNT(*)
-FROM rural_set;
