@@ -68,9 +68,9 @@ The experiment is also asymmetric - rural to urban transfers better than the rev
 
 ## Stack
 
-DuckDB
-Python 
- - pandas
- - scikit-learn
- - matplotlib / seaborn
-Jupyter
+- DuckDB
+- Python 
+ -- pandas
+ -- scikit-learn
+ -- matplotlib / seaborn
+- Jupyter
