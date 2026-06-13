@@ -1,8 +1,16 @@
 # Predicting Traffic Accident Fatality in Estonia
 
-Can a model trained only on urban accidents predict whether a rural crash will be fatal? The short answer is: partially, but with clear limits.
+## Research Question
 
-This is a binary classification project built on Estonian road accident data from 2018-2025. The main experiment is a distribution shift test: train on urban accidents, apply to rural, and measure  performance when the context changes.
+Can a model trained only on urban accidents predict whether a rural crash will be fatal? This is a binary classification project built on Estonian road accident data from 2018-2025. The main experiment is a distribution shift test: train on urban accidents, apply to rural, and measure  performance when the context changes.
+
+---
+
+## Key Insights
+
+Model trained on urban accidents fail to generalize reliably to rural sccidents, primarily due to data scarcity and structural differences in accident patterns. 
+When trained on a larger national dataset (6× more fatal cases), the same model improves from ROC-AUC 0.635 → 0.769.
+Simply put: the features work, the data size is the bottleneck.
 
 ---
 
@@ -31,7 +39,7 @@ Urban and rural sets share zero accident IDs.
 
 ## Results
 
-**Final model:** Logistic Regression with `class_weight='balanced'`. Random Forest was tested and rejected - despite a higher ROC-AUC on the ROC curve (0.717 vs 0.668), the PR curve tells that RF only maintains any precision by almost never predicting fatal, making it unusable in practice. See the curves below.
+**Final model:** Logistic Regression with `class_weight='balanced'`. Random Forest was not selected for final use - despite a higher ROC-AUC on the ROC curve (0.717 vs 0.668), the PR curve tells that RF only maintains any precision by almost never predicting fatal, making it unusable in practice. See the curves below.
 
 | Experiment | Train fatal | Test fatal | ROC-AUC | Recall |
 |---|---|---|---|---|
@@ -54,6 +62,14 @@ The experiment is also asymmetric - rural to urban transfers better than the rev
 
 ![ROC and PR curves - rural test set](figures/roc_pr_rural.png)
 *ROC and PR curves on rural test set (Logistic Regression). AUC drops from 0.668 to 0.635 compared to urban validation. The PR curve stays above the baseline (0.049) but the model struggles to maintain precision as recall increases.*
+
+---
+
+## Implications
+
+Models trained on limited or biased subsets of accident data may fail when applied to different environments.
+For safety-critical applications, this can lead to underestimation of fatality risk in rural areas.
+Improving coverage of high-risk cases (e.g. fatalities) is more impactful than adding new features.
 
 ---
 
