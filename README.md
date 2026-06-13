@@ -78,8 +78,10 @@ The experiment is also asymmetric - rural to urban transfers better than the rev
 ---
 
 ## Author
+
 Aleksandra Doroshenko 
 
-Acknowledgements
+## Acknowledgements
+
 This project was completed as part of the Implementing Machine Learning for Technical Specialists course by TalTech.
 AI tools were used during the development process to help review and debug code, clarify modelling concepts, and improve documentation. All analysis, data processing, modelling decisions, and conclusions were performed and validated by the author.
