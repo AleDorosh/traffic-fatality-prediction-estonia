@@ -98,6 +98,7 @@ data/
     raw_data_sample.csv
 figures/
     eda_03_accident_type_detailed.png
+    map_preview.png
     roc_pr_curves_urban.png
     roc_pr_rural.png
 notebooks/
