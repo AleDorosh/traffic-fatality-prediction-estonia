@@ -87,8 +87,8 @@ Improving coverage of high-risk cases (e.g. fatalities) is more impactful than a
 - **DuckDB**
 - **Python** 
   - pandas
- - scikit-learn
- - matplotlib / seaborn
+  - scikit-learn
+  - matplotlib / seaborn
 - **Jupyter**
 
 ---
