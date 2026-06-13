@@ -8,7 +8,7 @@ Can a model trained only on urban accidents predict whether a rural crash will b
 
 ## Key Insights
 
-Model trained on urban accidents fail to generalize reliably to rural sccidents, primarily due to data scarcity and structural differences in accident patterns. 
+Models trained on urban accidents fail to generalize reliably to rural sccidents, primarily due to data scarcity and structural differences in accident patterns. 
 When trained on a larger national dataset (6× more fatal cases), the same model improves from ROC-AUC 0.635 → 0.769.
 Simply put: the features work, the data size is the bottleneck.
 
@@ -39,7 +39,7 @@ Urban and rural sets share zero accident IDs.
 
 ## Results
 
-**Final model:** Logistic Regression with `class_weight='balanced'`. Random Forest was not selected for final use - despite a higher ROC-AUC on the ROC curve (0.717 vs 0.668), the PR curve tells that RF only maintains any precision by almost never predicting fatal, making it unusable in practice. See the curves below.
+**Final model:** Logistic Regression with `class_weight='balanced'`. Random Forest was not selected for final use - despite a higher ROC-AUC on the ROC curve (0.717 vs 0.668), the PR curve reveals that RF only maintains any precision by almost never predicting fatal, making it unusable in practice. See the curves below.
 
 | Experiment | Train fatal | Test fatal | ROC-AUC | Recall |
 |---|---|---|---|---|
@@ -84,12 +84,37 @@ Improving coverage of high-risk cases (e.g. fatalities) is more impactful than a
 
 ## Stack
 
-- DuckDB
-- Python 
- -- pandas
- -- scikit-learn
- -- matplotlib / seaborn
-- Jupyter
+- **DuckDB**
+- **Python** 
+  - pandas
+ - scikit-learn
+ - matplotlib / seaborn
+- **Jupyter**
+
+---
+
+```
+data/
+    raw_data_sample.csv
+figures/
+    eda_03_accident_type_detailed.png
+    roc_pr_curves_urban.png
+    roc_pr_rural.png
+notebooks/
+    01_eda_urban_rural.ipynb
+    02_feature_engineering_urban.ipynb
+    03_modelling_urban.ipynb
+    04_evaluation.ipynb
+    05_flipped_experiment.ipynb
+    06_national_baseline.ipynb
+sql/
+    urban_set.sql
+    rural_set.sql
+    national_set.sql
+methodology.md       - detailed data preparation, feature engineering, modelling decisions
+data_sources.md      - dataset links and licences
+README.md
+```
 
 ---
 
