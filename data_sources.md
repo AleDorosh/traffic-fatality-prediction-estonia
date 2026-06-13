@@ -29,4 +29,4 @@ All raw data files are excluded from version control. Download links and licence
 
 Accident points were joined to road width polygons using a spatial join in QGIS. Matches within 15 meters were retained. A preview of the spatial join result is in `data/map_preview.png`.
 
-<img width="600" height="450" src="data/map_preview.png"/>
+<img width="600" height="450" src="figures/map_preview.png"/>
