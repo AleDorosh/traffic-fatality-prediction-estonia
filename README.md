@@ -30,6 +30,21 @@ Urban and rural sets share zero accident IDs.
 
 ---
 
+## Terms
+
+| Term | Meaning |
+|---|---|
+| Fatality rate | Percentage of accidents in a dataset that resulted in at least one death. |
+| ROC-AUC | Area Under the Receiver Operating Characteristic Curve. Measures how well a model ranks fatal cases above non-fatal across all possible decision thresholds. A score of 1.0 is perfect; 0.5 is no better than random. |
+| PR-AUC | Area Under the Precision-Recall Curve. More informative than ROC-AUC when the positive class (fatal) is rare. |
+| Recall | Of all actual fatal accidents, the proportion the model correctly identified as fatal. Also called sensitivity. |
+| OHE | One-Hot Encoding - converting a categorical variable (e.g. road condition: dry / wet / icy) into separate binary columns, one per category. |
+| Distribution shift | When the statistical properties of the test data differ from the training data. Here: training on urban accidents, testing on rural, where fatality rates and road conditions differ meaningfully. |
+| class_weight='balanced' | A model setting that penalises misclassification of the minority class (fatal) proportionally to its rarity, preventing the model from ignoring it entirely. |
+| OOD | Out-of-Distribution - data from a context the model was not trained on. Here: rural accidents evaluated against an urban-trained model. |
+
+--- 
+
 ## Data overview
 
 ![Fatality rate by accident type (detailed), urban vs rural](figures/eda_03_accident_type_detailed.png)
