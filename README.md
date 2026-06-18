@@ -41,7 +41,6 @@ Urban and rural sets share zero accident IDs.
 | OHE | One-Hot Encoding - converting a categorical variable (e.g. road condition: dry / wet / icy) into separate binary columns, one per category. |
 | Distribution shift | When the statistical properties of the test data differ from the training data. Here: training on urban accidents, testing on rural, where fatality rates and road conditions differ meaningfully. |
 | class_weight='balanced' | A model setting that penalises misclassification of the minority class (fatal) proportionally to its rarity, preventing the model from ignoring it entirely. |
-| OOD | Out-of-Distribution - data from a context the model was not trained on. Here: rural accidents evaluated against an urban-trained model. |
 
 --- 
 
