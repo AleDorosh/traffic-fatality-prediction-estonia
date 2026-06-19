@@ -137,6 +137,8 @@ README.md
 
 Aleksandra Doroshenko 
 
+---
+
 ## Acknowledgements
 
 This project was completed as part of the Implementing Machine Learning for Technical Specialists course by TalTech.
